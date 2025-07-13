@@ -6,10 +6,10 @@ import google.generativeai as genai
 import colorama
 from colorama import Fore, Style
 
-# Инициализация цветов (только для вывода)
+
 colorama.init(autoreset=True)
 
-# Настройки API
+
 API_KEYS = {
     'openai': "",    # ChatGPT
     'deepseek': "",  # Deepseek
@@ -27,7 +27,7 @@ class Terminal:
         self.init_clients()
     
     def init_clients(self):
-        """Инициализация API клиентов"""
+
         try:
             if API_KEYS['openai']:
                 self.clients['chatgpt'] = OpenAI(api_key=API_KEYS['openai'])
@@ -43,11 +43,11 @@ class Terminal:
             print(f"{Fore.RED}[!] Ошибка API: {str(e)}")
 
     def clear_screen(self):
-        """Очистка экрана"""
+
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def print_logo(self):
-        """Вывод логотипа с цветами"""
+
         print(Fore.BLUE + r"""
   _______      _ _  ______ _____ 
  |__   __|    | | | |  ___|_   _|
@@ -61,13 +61,13 @@ class Terminal:
         print(Style.RESET_ALL + "-" * 50)
 
     def print_prompt(self):
-        """Приглашение командной строки (БЕЗ ЦВЕТОВ)"""
+
         if self.current_ai:
             return input(f"user@tailfin:[{self.current_ai}]$ ")
         return input("user@tailfin:~$ ")
 
     def chat_session(self, ai_name):
-        """Сессия чата с ИИ"""
+
         self.current_ai = ai_name
         client = self.clients.get(ai_name.lower())
         
@@ -126,7 +126,7 @@ class Terminal:
         print(f"{Fore.GREEN}[+] Сессия {ai_name} завершена")
 
     def command_mode(self):
-        """Режим выполнения команд"""
+
         print(f"\n{Fore.GREEN}[+] Режим командной строки (выход: 'back')")
         
         while True:
@@ -162,7 +162,7 @@ class Terminal:
                 print(f"{Fore.RED}[!] Ошибка: {str(e)}")
 
     def show_help(self):
-        """Показать справку"""
+
         help_text = f"""
 {Fore.YELLOW}# Доступные команды:
 chatgpt    - Чат с ChatGPT
@@ -181,7 +181,7 @@ user@tailfin:~$ dir
         print(help_text)
 
     def run(self):
-        """Основной цикл"""
+
         self.clear_screen()
         self.print_logo()
         
